@@ -1,9 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-
-export enum BorrowStatus {
-  BORROWED = 'borrowed',
-  RETURNED = 'returned',
-}
+import { BorrowStatus } from '../../types';
 
 export class CreateTransactionDto {
   @ApiProperty()

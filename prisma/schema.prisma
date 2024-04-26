@@ -8,11 +8,11 @@ datasource db {
 }
 
 model Book {
-  code        String        @id
-  title       String        @db.VarChar(255)
-  author      String        @db.VarChar(255)
-  stock       Int
-  Transaction Transaction[]
+  code     String        @id
+  title    String        @db.VarChar(255)
+  author   String        @db.VarChar(255)
+  stock    Int
+  borrowed Transaction[]
 
   @@map("books")
 }
@@ -22,7 +22,7 @@ model Member {
   name           String        @db.VarChar(255)
   isPenalty      Boolean?      @default(false)
   endPenaltyDate DateTime?
-  Transaction    Transaction[]
+  borrowed       Transaction[]
 
   @@map("members")
 }

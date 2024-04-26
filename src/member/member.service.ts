@@ -1,26 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
+import { MemberRepository } from './repositories/member.repository';
 
 @Injectable()
 export class MemberService {
+  constructor(private readonly memberRepository: MemberRepository) {}
+
   create(createMemberDto: CreateMemberDto) {
-    return 'This action adds a new member';
+    return this.memberRepository.create(createMemberDto);
   }
 
   findAll() {
-    return `This action returns all member`;
+    return this.memberRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} member`;
+  findOne(code: string) {
+    return this.memberRepository.findOne({ code });
   }
 
-  update(id: number, updateMemberDto: UpdateMemberDto) {
-    return `This action updates a #${id} member`;
+  update(code: string, updateMemberDto: UpdateMemberDto) {
+    return this.memberRepository.update({
+      where: { code },
+      data: updateMemberDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} member`;
+  remove(code: string) {
+    return this.memberRepository.remove({ code });
   }
 }
