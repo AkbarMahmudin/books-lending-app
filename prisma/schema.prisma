@@ -31,9 +31,9 @@ model Transaction {
   id         Int               @id @default(autoincrement())
   bookCode   String
   memberCode String
-  borrowDate DateTime
+  borrowDate DateTime?         @default(now())
   returnDate DateTime?
-  status     TransactionStatus
+  status     TransactionStatus @default(borrowed)
 
   book   Book   @relation(fields: [bookCode], references: [code])
   member Member @relation(fields: [memberCode], references: [code])

@@ -1,18 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { BorrowStatus } from '../../types';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateTransactionDto {
   @ApiProperty()
+  @IsNotEmpty()
+  @IsString()
   memberCode: string;
-
-  @ApiProperty()
-  bookCode: string;
-
-  @ApiProperty({
-    description: 'The date the book is borrowed',
-  })
-  borrowDate: Date;
-
-  @ApiProperty({ enum: BorrowStatus, default: BorrowStatus.BORROWED })
-  status: BorrowStatus;
 }
