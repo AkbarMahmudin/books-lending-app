@@ -33,8 +33,11 @@ describe('BookController', () => {
   });
 
   it('should return an array of books', async () => {
-    const books = await controller.findAll();
-    expect(books).toBeInstanceOf(Array);
+    const result = await controller.findAll();
+    expect(result).toHaveProperty('books');
+    expect(result.books).toBeInstanceOf(Array);
+    expect(result).toHaveProperty('totalStock');
+    expect(result.totalStock).toBeGreaterThan(0);
   });
 
   it('should return a book', async () => {

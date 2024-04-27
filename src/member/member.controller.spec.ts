@@ -32,8 +32,13 @@ describe('MemberController', () => {
   });
 
   it('should find all members', async () => {
-    const members = await controller.findAll();
-    expect(members).toBeInstanceOf(Array);
+    const results = await controller.findAll();
+    expect(results).toHaveProperty('members');
+    expect(results.members).toBeInstanceOf(Array);
+    expect(results).toHaveProperty('totalMembers');
+    expect(results.totalMembers).toBeGreaterThanOrEqual(0);
+    expect(results).toHaveProperty('totalBorrowed');
+    expect(results.totalBorrowed).toBeGreaterThanOrEqual(0);
   });
 
   it('should find a member by code', async () => {

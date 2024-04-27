@@ -11,8 +11,11 @@ export class BookService {
     return this.bookRepository.create(createBookDto);
   }
 
-  findAll() {
-    return this.bookRepository.findAll();
+  async findAll() {
+    const books = await this.bookRepository.findAll();
+    const totalStock = await this.bookRepository.sumStock();
+
+    return { books, totalStock: totalStock._sum.stock };
   }
 
   findOne(code: string) {

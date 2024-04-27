@@ -11,8 +11,12 @@ export class MemberService {
     return this.memberRepository.create(createMemberDto);
   }
 
-  findAll() {
-    return this.memberRepository.findAll();
+  async findAll() {
+    const members = await this.memberRepository.findAll();
+    const totalMembers = members.length;
+    const totalBorrowed = await this.memberRepository.countBorrowed();
+
+    return { members, totalMembers, totalBorrowed };
   }
 
   findOne(code: string) {

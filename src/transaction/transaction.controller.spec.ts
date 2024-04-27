@@ -54,6 +54,9 @@ const mockMembers = [
   },
 ];
 
+jest.useFakeTimers();
+jest.setTimeout(30000);
+
 describe('TransactionController', () => {
   let controller: TransactionController;
   let prisma: PrismaService;

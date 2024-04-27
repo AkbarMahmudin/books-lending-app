@@ -43,4 +43,12 @@ export class BookRepository {
   async remove(where: Prisma.BookWhereUniqueInput) {
     return this.model.delete({ where });
   }
+
+  async count(where?: Prisma.BookWhereInput) {
+    return this.model.count({ where });
+  }
+
+  async sumStock(where?: Prisma.BookWhereInput) {
+    return this.model.aggregate({ _sum: { stock: true }, where });
+  }
 }

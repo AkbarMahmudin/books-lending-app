@@ -67,4 +67,21 @@ export class MemberRepository {
   async remove(where: Prisma.MemberWhereUniqueInput) {
     return this.model.delete({ where });
   }
+
+  async count(where?: Prisma.MemberWhereInput) {
+    return this.model.count({ where });
+  }
+
+  async countBorrowed(where?: Prisma.MemberWhereInput) {
+    return this.model.count({
+      where: {
+        ...where,
+        borrowed: {
+          some: {
+            status: BorrowStatus.BORROWED,
+          },
+        },
+      },
+    });
+  }
 }
